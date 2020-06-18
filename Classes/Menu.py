@@ -12,6 +12,9 @@ class Menu:
         textSurface = font.render(text, True, color, surf)
         return textSurface
 
+    def next_state(self):
+        return self.next_s
+
     def draw(self,screen):
         clock = pygame.time.Clock()
 
@@ -33,9 +36,9 @@ class Menu:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if 300 <= mouse_pos[0] <= 500:
                         if 300 <= mouse_pos[1] <= 350:
-                            return 1
+                            self.next_s = 1
                         if 400 <= mouse_pos[1] <= 450:
-                            return 0
+                            self.next_s = 0
                 if 300 <= mouse_pos[0] <= 500:
                     if 300 <= mouse_pos[1] <= 350:
                         game_button[1] = (255, 0, 0)

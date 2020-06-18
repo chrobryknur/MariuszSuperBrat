@@ -41,9 +41,8 @@ class Main:
         pygame.init()
         window = pygame.display.set_mode(self.WindowConfig.windowSize)
         while not self.handle_events():
-            next_state = self.currentGameState.draw(window)
-            if next_state == 0:
-                return
+            self.currentGameState.draw(window)
+            next_state = self.currentGameState.next_state()
             if next_state == 1:
                 self.currentGameState=self.GameStates[1]
 
