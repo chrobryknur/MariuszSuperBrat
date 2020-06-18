@@ -7,7 +7,7 @@ import pygame
 
 class GameOver:
     def __init__(self):
-        print("elo")
+        print("siema")
 
 
 class WindowConfiguration:
