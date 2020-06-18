@@ -4,55 +4,98 @@ SKY = "."
 BRICK = "#"
 PIPE = "/"
 
+
 class Game:
-    def __init__(self):
+    def __init__(self,wsize):
+        self.initiated = False
+        self.tile_x, self.tile_y = 32, 32
         self.level = self.load_level()
+        self.surface = pygame.display.set_mode(wsize)
+        self.x = 0
+        self.y = 0
+        self.dx = 5
+        self.dy = 5
+        self.gravity = 10
+        self.jump = 10
+        self.pressed_w = False
+        self.pressed_d = False
+        self.pressed_a = False
+        self.pressed_s = False
+        self.clock = pygame.time.Clock()
 
     def next_state(self):
         return self.next_s
 
-    def load_level(self):
-        file = open("Levels/Level1","r")
-        print(file.readline())
+    def load_tile(self, type, x, y):
+        image = 0
+        if type == SKY:
+            image = 0
+        elif type == BRICK:
+            image = pygame.image.load("Assets/brick.png").convert()
+        image_width, image_height = 32,32
+        rect = (x * image_width, y * image_height, image_width, image_height)
+        return [image, rect]
 
-    def draw(self):
+    def load_level(self):
+        file = open("Levels/Level1", "r")
+        level = []
+        for i in range(0, 19):
+            l = []
+            level.append(l)
+            line = file.readline()
+            for j in range(0, 79):
+                l.append(self.load_tile(line[j], j, i))
+        return level
+
+    def init(self):
+        self.background = pygame.image.load("Assets/main_menu_bg.png")
+
+    def draw(self, screen):
         if not self.initiated:
             self.init()
             self.initiated = True
-
-        clock = pygame.time.Clock()
-
-        handle=True
-        while handle:
-            self.surface.blit(self.background,(0,0))
+        self.handle = True
+        self.surface.blit(self.background, (0, 0))
+        while self.handle:
             for event in pygame.event.get():
-                mouse_pos = pygame.mouse.get_pos()
                 if event.type == pygame.locals.QUIT:
-                    handle=False
+                    self.handle = False
+                    self.next_s = -1
                     return 0
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if 300 <= mouse_pos[0] <= 500:
-                        if 300 <= mouse_pos[1] <= 350:
-                            self.next_s = 1
-                        if 400 <= mouse_pos[1] <= 450:
-                            self.next_s = 0
-                if 300 <= mouse_pos[0] <= 500:
-                    if 300 <= mouse_pos[1] <= 350:
-                        self.game_button[1] = (255, 0, 0)
-                    else:
-                        self.game_button[1] = (0, 0, 0)
-                    if 400 <= mouse_pos[1] <= 450:
-                        self.quit_button[1] = (255, 0, 0)
-                    else:
-                        self.quit_button[1] = (0, 0, 0)
-            self.game_button[2] = self.text_sufrace("Start game", self.buttonText, self.game_button[1])
-            self.quit_button[2] = self.text_sufrace("Quit game", self.buttonText, self.quit_button[1])
-            pygame.draw.rect(self.surface, self.game_button[1], self.game_button[0], 5)
-            pygame.draw.rect(self.surface, self.quit_button[1], self.quit_button[0], 5)
-            screen.blit(self.title[2],(95,140))
-            screen.blit(self.game_button[2], (332,316))
-            screen.blit(self.quit_button[2], (340,416))
-            screen.blit(self.surface,(0,0))
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_w:
+                        self.pressed_w = True
+                    if event.key == pygame.K_s:
+                        self.pressed_s = True
+                    if event.key == pygame.K_a:
+                        self.pressed_a = True
+                    if event.key == pygame.K_d:
+                        self.pressed_d = True
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_w:
+                        self.pressed_w = False
+                    if event.key == pygame.K_s:
+                        self.pressed_s = False
+                    if event.key == pygame.K_a:
+                        self.pressed_a = False
+                    if event.key == pygame.K_d:
+                        self.pressed_d = False
 
+            if self.pressed_w:
+                self.y += self.dy
+            if self.pressed_s:
+                self.y -= self.dy
+            if self.pressed_a:
+                self.x += self.dx
+            if self.pressed_d:
+                self.x -= self.dx
+
+
+            for x, row in enumerate(self.level):
+                for y, tile in enumerate(row):
+                    pygame.draw.rect(self.surface,(0,0,0,0),tile[1])
+                    if tile[0]:
+                        self.surface.blit(tile[0],(tile[1][0] + self.x,tile[1][1]+self.y))
+            screen.blit(self.surface,(0,0))
             pygame.display.update()
-            clock.tick(15)
+            self.clock.tick(50)
