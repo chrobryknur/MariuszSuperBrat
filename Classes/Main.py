@@ -1,4 +1,3 @@
-import pygame, sys
 import pygame.locals
 import Classes.Menu as Menu
 import Classes.Game as Game
