@@ -2,6 +2,9 @@ import pygame
 import Classes.Map as Map
 import Classes.Info as Info
 import Classes.Player as Player
+import Classes.Fly as Fly
+import Classes.Snake as Snake
+
 
 
 class Game:
@@ -16,6 +19,7 @@ class Game:
         self.level = self.map.load_level()
         self.handle = True
         self.next_s = 1
+        self.creatures = [Fly.Fly([1120, 288]),Snake.Snake([1408, 352])]
 
     def next_state(self):
         return self.next_s
@@ -56,6 +60,7 @@ class Game:
                 else:
                     self.info.player_x -= self.info.dx
             self.player.current_texture = "left"
+
         if self.info.pressed_d:
             pos = self.info.player_pos_on_map()
             pos[0] -= self.info.dx
@@ -65,6 +70,13 @@ class Game:
                 else:
                     self.info.x -= self.info.dx
             self.player.current_texture = "right"
+
+        for creature in self.creatures:
+            player_pos = self.info.player_pos_on_map()
+            creature_pos = creature.creature_rect()
+
+            self.player.colision_with_creature(player_pos,creature_pos)
+
 
     def check_for_end(self):
         if self.player.died:
@@ -82,10 +94,13 @@ class Game:
             self.info.score += self.info.lifes_left * 300
             self.handle = False
 
+
     def update_screen(self,screen):
         screen.blit(self.background, (0, 0))
         screen.blit(self.map.draw_map(self.level, self.surface, self.info.x, self.info.y), (0, 0))
         screen.blit(self.player.draw(self.surface, self.info.player_x, self.info.player_y), (0, 0))
+        for creature in self.creatures:
+            screen.blit(creature.draw(self.surface,self.info.x,self.info.y,self.map.level_repr),(0,0))
         screen.blit(self.info.draw(self.surface), (0, 0))
         pygame.display.update()
 

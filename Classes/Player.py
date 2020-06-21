@@ -50,6 +50,10 @@ class Player:
                 return y
         return y
 
+    def colision_with_creature(self,pos,creature_rect):
+        if pygame.Rect(-pos[0],-pos[1],BLOCK_SIZE,BLOCK_SIZE).colliderect(creature_rect):
+            self.died = True
+
     def draw(self,surface,x,y):
         pygame.draw.rect(surface,(0,0,0),(x,y,BLOCK_SIZE,BLOCK_SIZE))
         if self.current_texture == "right":
