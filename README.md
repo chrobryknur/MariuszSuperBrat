@@ -1,5 +1,4 @@
-# Mariusz Super Brat
-## Gra platformowa
+# Mariusz Super Brat - gra platformowa
 
 ### Instalacja
 `pip3 install pygame`
