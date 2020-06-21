@@ -113,6 +113,7 @@ class Game:
         while self.handle and not self.player.reached_end and not self.player.died:
             self.handle_events()
             self.info.update_score()
+            self.info.fps = self.clock.get_fps()
             self.update_screen(screen)
-            self.clock.tick(60)
+            self.clock.tick(70)
         self.check_for_end()

@@ -16,6 +16,7 @@ class Info:
         self.pressed_d = False
         self.pressed_a = False
         self.score = score
+        self.fps = 0
         self.lifes_left = lifes
         self.result = "lost"
 
@@ -36,5 +37,6 @@ class Info:
         self.infoText = pygame.font.Font("Assets/pcsenior.ttf", 15)
         surface.blit(self.text_surface("Score:" + str(self.score), self.infoText, (0, 0, 0)), (600, 20))
         surface.blit(self.text_surface("Lifes left:", self.infoText, (0, 0, 0)), (600, 50))
+        surface.blit(self.text_surface("FPS:" + str(math.floor(self.fps)),self.infoText, (0,0,0)),(20,20))
         surface.blit(self.text_surface(str(self.lifes_left), self.infoText, (255, 0, 0)), (770, 50))
         return surface
