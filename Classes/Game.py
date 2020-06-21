@@ -6,21 +6,19 @@ import Classes.Player as Player
 
 class Game:
     def __init__(self, wsize):
-        self.initiated = False
+        pygame.init()
         self.surface = pygame.display.set_mode(wsize)
         self.map = Map.Map()
         self.player = Player.Player()
         self.info = Info.Info(self.player.lifes, 0)
         self.clock = pygame.time.Clock()
-
-    def next_state(self):
-        return self.next_s
-
-    def init(self):
         self.background = pygame.image.load("Assets/main_menu_bg.png").convert()
         self.level = self.map.load_level()
         self.handle = True
         self.next_s = 1
+
+    def next_state(self):
+        return self.next_s
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -68,20 +66,7 @@ class Game:
                     self.info.x -= self.info.dx
             self.player.current_texture = "right"
 
-    def draw(self, screen):
-        if not self.initiated:
-            self.init()
-            self.initiated = True
-        while self.handle and not self.player.reached_end and not self.player.died:
-            self.handle_events()
-            self.info.update_score()
-            screen.blit(self.background, (0, 0))
-            screen.blit(self.map.draw_map(self.level, self.surface, self.info.x, self.info.y), (0, 0))
-            screen.blit(self.player.draw(self.surface, self.info.player_x, self.info.player_y), (0, 0))
-            screen.blit(self.info.draw(self.surface), (0, 0))
-            pygame.display.update()
-            self.clock.tick(60)
-
+    def check_for_end(self):
         if self.player.died:
             if self.info.lifes_left == 0:
                 self.next_s = 2
@@ -96,3 +81,18 @@ class Game:
             self.info.result = "won"
             self.info.score += self.info.lifes_left * 300
             self.handle = False
+
+    def update_screen(self,screen):
+        screen.blit(self.background, (0, 0))
+        screen.blit(self.map.draw_map(self.level, self.surface, self.info.x, self.info.y), (0, 0))
+        screen.blit(self.player.draw(self.surface, self.info.player_x, self.info.player_y), (0, 0))
+        screen.blit(self.info.draw(self.surface), (0, 0))
+        pygame.display.update()
+
+    def draw(self, screen):
+        while self.handle and not self.player.reached_end and not self.player.died:
+            self.handle_events()
+            self.info.update_score()
+            self.update_screen(screen)
+            self.clock.tick(60)
+        self.check_for_end()

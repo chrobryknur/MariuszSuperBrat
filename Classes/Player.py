@@ -6,13 +6,10 @@ BLOCK_SIZE = 32
 class Player:
     def __init__(self):
         self.lifes = 3
-        self.initiated = False
         self.velocity = [0,0]
         self.reached_end = False
         self.current_texture = "right"
         self.died = False
-
-    def load_texture(self):
         self.texture_left = pygame.image.load("Assets/Mariusz_left.png").convert_alpha()
         self.texture_right = pygame.image.load("Assets/Mariusz_right.png").convert_alpha()
 
@@ -45,18 +42,15 @@ class Player:
     def jump(self,pos,map):
         y = 0
         for i in range (1,4):
-            l = map[math.floor(-pos[1]/BLOCK_SIZE)-i][math.floor(-pos[0]/BLOCK_SIZE)]
-            r = map[math.floor(-pos[1]/BLOCK_SIZE)-i][math.floor((-pos[0]+BLOCK_SIZE-1)/BLOCK_SIZE)]
-            if not l == '#' and not r == '#':
+            left = map[math.floor(-pos[1]/BLOCK_SIZE)-i][math.floor(-pos[0]/BLOCK_SIZE)]
+            right = map[math.floor(-pos[1]/BLOCK_SIZE)-i][math.floor((-pos[0]+BLOCK_SIZE-1)/BLOCK_SIZE)]
+            if not left == '#' and not right == '#':
                 y += BLOCK_SIZE
             else:
                 return y
         return y
 
     def draw(self,surface,x,y):
-        if not self.initiated:
-            self.initiated = True
-            self.load_texture()
         pygame.draw.rect(surface,(0,0,0),(x,y,BLOCK_SIZE,BLOCK_SIZE))
         if self.current_texture == "right":
             surface.blit(self.texture_right,(x-8,y-16))
