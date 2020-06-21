@@ -3,6 +3,9 @@ import pygame
 SKY = "."
 BRICK = "#"
 PIPE = "/"
+WALL = "$"
+NETHER = '%'
+END = '^'
 
 class Map:
     def __init__(self):
@@ -13,6 +16,12 @@ class Map:
         if type == SKY:
             image = 0
         elif type == BRICK:
+            image = pygame.image.load("Assets/brick.png").convert()
+        elif type == WALL:
+            image = pygame.image.load("Assets/wall.png").convert()
+        elif type == NETHER:
+            image = pygame.image.load("Assets/nether.png").convert()
+        elif type == END:
             image = pygame.image.load("Assets/brick.png").convert()
         image_width, image_height = 32,32
         rect = (x * image_width, y * image_height, image_width, image_height)
@@ -27,7 +36,7 @@ class Map:
             level.append(l)
             line = file.readline()
             self.level_repr.append(line)
-            for j in range(0, 79):
+            for j in range(0, 73):
                 l.append(self.load_tile(line[j], j, i))
         return level
 

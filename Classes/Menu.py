@@ -33,7 +33,6 @@ class Menu:
             self.initiated = True
 
         while self.handle:
-            self.surface.blit(self.background,(0,0))
             for event in pygame.event.get():
                 if event.type == pygame.locals.QUIT:
                     self.handle=False
@@ -54,6 +53,7 @@ class Menu:
                 else:
                     self.quit_button[1] = (0, 0, 0)
 
+            self.surface.blit(self.background, (0, 0))
             self.game_button[2] = self.text_sufrace("Start game", self.buttonText, self.game_button[1])
             self.quit_button[2] = self.text_sufrace("Quit game", self.buttonText, self.quit_button[1])
             pygame.draw.rect(self.surface, self.game_button[1], self.game_button[0], 5)
