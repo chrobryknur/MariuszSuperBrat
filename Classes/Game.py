@@ -3,13 +3,14 @@ import Classes.Map as Map
 import Classes.Info as Info
 import Classes.Player as Player
 
+
 class Game:
-    def __init__(self,wsize):
+    def __init__(self, wsize):
         self.initiated = False
         self.surface = pygame.display.set_mode(wsize)
         self.map = Map.Map()
         self.player = Player.Player()
-        self.info = Info.Info(self.player.lifes,0)
+        self.info = Info.Info(self.player.lifes, 0)
         self.clock = pygame.time.Clock()
 
     def next_state(self):
@@ -20,7 +21,6 @@ class Game:
         self.level = self.map.load_level()
         self.handle = True
         self.next_s = 1
-
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -67,6 +67,7 @@ class Game:
                 else:
                     self.info.x -= self.info.dx
             self.player.current_texture = "right"
+
     def draw(self, screen):
         if not self.initiated:
             self.init()
@@ -77,17 +78,21 @@ class Game:
             screen.blit(self.background, (0, 0))
             screen.blit(self.map.draw_map(self.level, self.surface, self.info.x, self.info.y), (0, 0))
             screen.blit(self.player.draw(self.surface, self.info.player_x, self.info.player_y), (0, 0))
-            screen.blit(self.info.draw(self.surface),(0,0))
+            screen.blit(self.info.draw(self.surface), (0, 0))
             pygame.display.update()
-            self.clock.tick(50)
+            self.clock.tick(60)
 
         if self.player.died:
             if self.info.lifes_left == 0:
-                self.next_s = -1
+                self.next_s = 2
+                self.info.result = "lost"
+                self.handle = False
             else:
-                self.info = Info.Info(self.info.lifes_left-1, self.info.score)
+                self.info = Info.Info(self.info.lifes_left - 1, self.info.score)
                 self.player.died = False
 
         if self.player.reached_end:
-            self.player.reached_end = False
-            self.info = Info.Info(self.player.lifes,0)
+            self.next_s = 2
+            self.info.result = "won"
+            self.info.score += self.info.lifes_left * 300
+            self.handle = False

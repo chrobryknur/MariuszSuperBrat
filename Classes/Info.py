@@ -17,6 +17,7 @@ class Info:
         self.pressed_a = False
         self.score = score
         self.lifes_left = lifes
+        self.result = "lost"
 
     def update_score(self):
         self.score = max(self.score,-math.floor(self.x/self.dx))

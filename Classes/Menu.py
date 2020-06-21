@@ -3,7 +3,6 @@ import pygame
 class Menu:
     def __init__(self,wsize):
         self.surface = pygame.display.set_mode(wsize)
-        pygame.display.set_caption('Mariusz Super Brat')
         self.initiated = False
         self.handle=True
 
