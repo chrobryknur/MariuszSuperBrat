@@ -9,6 +9,6 @@ class Snake(Creature.Creature):
         pygame.init()
         self.speed = 1
         self.pos = pos
-        self.texture_r = pygame.image.load("../Assets/snake_r.png").convert()
-        self.texture_l = pygame.image.load("../Assets/snake_l.png").convert()
+        self.texture_r = pygame.image.load("Assets/snake_r.png").convert()
+        self.texture_l = pygame.image.load("Assets/snake_l.png").convert()
         self.texture = self.texture_r

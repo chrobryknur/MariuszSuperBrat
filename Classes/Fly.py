@@ -9,6 +9,6 @@ class Fly(Creature.Creature):
         pygame.init()
         self.speed = 1
         self.pos = pos
-        self.texture_l = pygame.image.load("../Assets/fly_l.png")
-        self.texture_r = pygame.image.load("../Assets/fly_r.png")
+        self.texture_l = pygame.image.load("Assets/fly_l.png")
+        self.texture_r = pygame.image.load("Assets/fly_r.png")
         self.texture = self.texture_r

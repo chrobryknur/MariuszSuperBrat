@@ -8,10 +8,10 @@ class GameOver:
         self.handle = True
         self.result = result
         self.score = score
-        self.background = pygame.image.load("../Assets/main_menu_bg.png")
-        self.titleText = pygame.font.Font("../Assets/pcsenior.ttf", 40)
-        self.scoreText = pygame.font.Font("../Assets/pcsenior.ttf", 25)
-        self.buttonText = pygame.font.Font("../Assets/pcsenior.ttf", 15)
+        self.background = pygame.image.load("Assets/main_menu_bg.png")
+        self.titleText = pygame.font.Font("Assets/pcsenior.ttf", 40)
+        self.scoreText = pygame.font.Font("Assets/pcsenior.ttf", 25)
+        self.buttonText = pygame.font.Font("Assets/pcsenior.ttf", 15)
         if self.result == "won":
             self.title = [pygame.Rect(100, 100, 600, 100), (0, 0, 0),
                           self.text_surface("You won!", self.titleText, (0, 200, 64))]

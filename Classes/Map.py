@@ -18,21 +18,21 @@ class Map:
         if type == SKY:
             image = 0
         elif type == BRICK:
-            image = pygame.image.load("../Assets/brick.png").convert()
+            image = pygame.image.load("Assets/brick.png").convert()
         elif type == WALL:
-            image = pygame.image.load("../Assets/wall.png").convert()
+            image = pygame.image.load("Assets/wall.png").convert()
         elif type == NETHER:
-            image = pygame.image.load("../Assets/nether.png").convert()
+            image = pygame.image.load("Assets/nether.png").convert()
         elif type == END:
-            image = pygame.image.load("../Assets/brick.png").convert()
+            image = pygame.image.load("Assets/brick.png").convert()
         elif type == SPIKES:
-            image = pygame.image.load("../Assets/spikes.png").convert_alpha()
+            image = pygame.image.load("Assets/spikes.png").convert_alpha()
         image_width, image_height = BLOCK_SIZE,BLOCK_SIZE
         rect = (x * image_width, y * image_height, image_width, image_height)
         return [image, rect]
 
     def load_level(self):
-        file = open("../Levels/Level1", "r")
+        file = open("Levels/Level1", "r")
         level = []
         self.level_repr = []
         for i in range(0, 19):
