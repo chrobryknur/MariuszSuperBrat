@@ -11,8 +11,8 @@ class Player:
         self.reached_end = False
         self.current_texture = "right"
         self.died = False
-        self.texture_left = pygame.image.load("Assets/Mariusz_left.png").convert_alpha()
-        self.texture_right = pygame.image.load("Assets/Mariusz_right.png").convert_alpha()
+        self.texture_left = pygame.image.load("../Assets/Mariusz_left.png").convert_alpha()
+        self.texture_right = pygame.image.load("../Assets/Mariusz_right.png").convert_alpha()
 
     def check_for_collisions_right(self, pos, map):
         right1 = map[math.floor(-pos[1] / BLOCK_SIZE)][math.floor((-pos[0] + BLOCK_SIZE - 1) / BLOCK_SIZE)]

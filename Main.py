@@ -1,5 +1,5 @@
 import pygame.locals
-import Classes.Menu as Menu
+from Classes import Menu as Menu
 import Classes.Game as Game
 import Classes.GameOver as GameOver
 
@@ -11,21 +11,13 @@ GAME = 1
 GAME_OVER = 2
 
 
-class WindowConfiguration:
-    def __init__(self, w, h):
-        self.windowSize = (w, h)
-
-    def size(self):
-        return self.windowSize
-
-
 class Main:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption('Mariusz Super Brat')
-        self.WindowConfig = WindowConfiguration(800, 600)
-        self.window = pygame.display.set_mode(self.WindowConfig.windowSize)
-        self.GameStates = [Menu.Menu(self.WindowConfig.size())]
+        self.windowSize = (800, 600)
+        self.window = pygame.display.set_mode(self.windowSize)
+        self.GameStates = [Menu.Menu(self.windowSize)]
         self.prev_state = -2
         self.handle = True
         self.currentGameState = self.GameStates[MAIN_MENU]
@@ -36,13 +28,13 @@ class Main:
         if self.next_state != self.prev_state:
             if self.next_state == GAME:
                 if len(self.GameStates) < 3:
-                    self.GameStates.append(Game.Game(self.WindowConfig.size()))
+                    self.GameStates.append(Game.Game(self.windowSize))
                 else:
-                    self.GameStates[1] = Game.Game(self.WindowConfig.size())
+                    self.GameStates[1] = Game.Game(self.windowSize)
                 self.currentGameState = self.GameStates[GAME]
 
             if self.next_state == GAME_OVER:
-                game_over_screen = GameOver.GameOver(self.WindowConfig.size(),
+                game_over_screen = GameOver.GameOver(self.windowSize,
                                                      self.GameStates[GAME].info.result,
                                                      self.GameStates[GAME].info.score)
                 if len(self.GameStates) < 3:
@@ -64,3 +56,7 @@ class Main:
         while self.handle:
             self.handle_events()
             self.update_game_state()
+
+
+if __name__ == '__main__':
+    Main().run()
