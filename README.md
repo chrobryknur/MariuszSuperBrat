@@ -2,7 +2,7 @@
 
 ![](https://i.imgur.com/eFnhkR2.png)
 
-### Instalacja
+### Zależności
 ```
 sudo apt install python3 python3-pip
 pip3 install pygame
