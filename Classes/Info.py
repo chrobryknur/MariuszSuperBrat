@@ -17,7 +17,6 @@ class Info:
         self.pressed_d = False
         self.pressed_a = False
         self.game_over = False
-        self.double_jump = True
         self.score = score
         self.lifes_left = lifes
 
@@ -30,6 +29,9 @@ class Info:
         surf.fill(white)
         textSurface = font.render(text, True, color, surf)
         return textSurface
+
+    def player_pos_on_map(self):
+        return [self.x - self.player_x, self.y - self.player_y]
 
     def draw(self,surface):
         self.scoreText = pygame.font.Font("Assets/pcsenior.ttf", 15)
