@@ -33,7 +33,7 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
                     if not self.player.is_falling(self.info.player_pos_on_map(), self.map.level_repr):
-                        self.info.player_y -= self.player.jump(self.info.player_pos_on_map(), self.map.level_repr)
+                        self.player.jumping = 12
                 if event.key == pygame.K_a:
                     self.info.pressed_a = True
                 if event.key == pygame.K_d:
@@ -46,10 +46,15 @@ class Game:
                 if event.key == pygame.K_d:
                     self.info.pressed_d = False
 
-        if self.player.is_falling(self.info.player_pos_on_map(), self.map.level_repr):
+        if self.player.jumping > 0:
+            self.info.player_y -= self.player.jump(self.info.player_pos_on_map(), self.map.level_repr)
+            self.player.jumping = self.player.jumping -1
+
+        if self.player.jumping == 0 and self.player.is_falling(self.info.player_pos_on_map(), self.map.level_repr):
             self.info.player_y += self.info.gravity
             if self.info.player_y >= 568:
                 self.player.died = True
+
 
         if self.info.pressed_a:
             pos = self.info.player_pos_on_map()

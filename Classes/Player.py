@@ -13,6 +13,7 @@ class Player:
         self.died = False
         self.texture_left = pygame.image.load("Assets/Mariusz_left.png").convert_alpha()
         self.texture_right = pygame.image.load("Assets/Mariusz_right.png").convert_alpha()
+        self.jumping = -1
 
     def check_for_collisions_right(self, pos, map):
         right1 = map[math.floor(-pos[1] / BLOCK_SIZE)][math.floor((-pos[0] + BLOCK_SIZE - 1) / BLOCK_SIZE)]
@@ -45,13 +46,10 @@ class Player:
 
     def jump(self, pos, map):
         y = 0
-        for i in range(1, 4):
-            left = map[math.floor(-pos[1] / BLOCK_SIZE) - i][math.floor(-pos[0] / BLOCK_SIZE)]
-            right = map[math.floor(-pos[1] / BLOCK_SIZE) - i][math.floor((-pos[0] + BLOCK_SIZE - 1) / BLOCK_SIZE)]
-            if not left == '#' and not right == '#':
-                y += BLOCK_SIZE
-            else:
-                return y
+        left  = map[math.floor((-pos[1] - BLOCK_SIZE/4) / BLOCK_SIZE) ][math.floor(-pos[0] / BLOCK_SIZE)]
+        right = map[math.floor((-pos[1] - BLOCK_SIZE/4) / BLOCK_SIZE) ][math.floor((-pos[0] + BLOCK_SIZE - 1) / BLOCK_SIZE)]
+        if not left == '#' and not right == '#':
+            y += BLOCK_SIZE/4
         return y
 
     def collision_with_creature(self, pos, creature_rect):
