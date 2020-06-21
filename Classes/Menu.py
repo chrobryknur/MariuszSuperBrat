@@ -7,9 +7,9 @@ class Menu:
         self.surface = pygame.display.set_mode(wsize)
         self.initiated = False
         self.handle = True
-        self.background = pygame.image.load("../Assets/main_menu_bg.png")
-        self.titleText = pygame.font.Font("../Assets/pcsenior.ttf", 35)
-        self.buttonText = pygame.font.Font("../Assets/pcsenior.ttf", 15)
+        self.background = pygame.image.load("Assets/main_menu_bg.png")
+        self.titleText = pygame.font.Font("Assets/pcsenior.ttf", 35)
+        self.buttonText = pygame.font.Font("Assets/pcsenior.ttf", 15)
         self.title = [pygame.Rect(100, 100, 600, 100), (0, 0, 0),
                       self.text_surface("Mariusz Super Brat", self.titleText, (0, 96, 128))]
         self.game_button = [pygame.Rect(300, 300, 200, 50), (0, 0, 0),
