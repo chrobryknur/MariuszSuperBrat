@@ -12,11 +12,9 @@ class Info:
         self.dx = 4
         self.dy = 4
         self.gravity = 4
-        self.jump = 96
         self.pressed_w = False
         self.pressed_d = False
         self.pressed_a = False
-        self.game_over = False
         self.score = score
         self.lifes_left = lifes
 
@@ -34,9 +32,8 @@ class Info:
         return [self.x - self.player_x, self.y - self.player_y]
 
     def draw(self,surface):
-        self.scoreText = pygame.font.Font("Assets/pcsenior.ttf", 15)
-        self.lifesText = self.scoreText
-        surface.blit(self.text_sufrace("Score:" + str(self.score), self.scoreText, (0, 0, 0)), (600, 20))
-        surface.blit(self.text_sufrace("Lifes left:", self.lifesText, (0, 0, 0)), (600, 50))
-        surface.blit(self.text_sufrace(str(self.lifes_left), self.lifesText, (255, 0, 0)), (770, 50))
+        self.infoText = pygame.font.Font("Assets/pcsenior.ttf", 15)
+        surface.blit(self.text_sufrace("Score:" + str(self.score), self.infoText, (0, 0, 0)), (600, 20))
+        surface.blit(self.text_sufrace("Lifes left:", self.infoText, (0, 0, 0)), (600, 50))
+        surface.blit(self.text_sufrace(str(self.lifes_left), self.infoText, (255, 0, 0)), (770, 50))
         return surface

@@ -47,7 +47,7 @@ class Game:
         if self.player.is_falling(self.info.player_pos_on_map(), self.map.level_repr):
             self.info.player_y += self.info.gravity
             if self.info.player_y >= 568:
-                self.info.game_over = True
+                self.player.died = True
 
         if self.info.pressed_a:
             pos = self.info.player_pos_on_map()
@@ -57,6 +57,7 @@ class Game:
                     self.info.x += self.info.dx
                 else:
                     self.info.player_x -= self.info.dx
+            self.player.current_texture = "left"
         if self.info.pressed_d:
             pos = self.info.player_pos_on_map()
             pos[0] -= self.info.dx
@@ -65,12 +66,12 @@ class Game:
                     self.info.player_x += self.info.dx
                 else:
                     self.info.x -= self.info.dx
-
+            self.player.current_texture = "right"
     def draw(self, screen):
         if not self.initiated:
             self.init()
             self.initiated = True
-        while self.handle and not self.info.game_over and not self.player.reached_end:
+        while self.handle and not self.player.reached_end and not self.player.died:
             self.handle_events()
             self.info.update_score()
             screen.blit(self.background, (0, 0))
@@ -80,11 +81,12 @@ class Game:
             pygame.display.update()
             self.clock.tick(50)
 
-        if self.info.game_over:
+        if self.player.died:
             if self.info.lifes_left == 0:
                 self.next_s = -1
             else:
                 self.info = Info.Info(self.info.lifes_left-1, self.info.score)
+                self.player.died = False
 
         if self.player.reached_end:
             self.player.reached_end = False

@@ -6,10 +6,12 @@ PIPE = "/"
 WALL = "$"
 NETHER = '%'
 END = '^'
+SPIKES='&'
+BLOCK_SIZE = 32
 
 class Map:
     def __init__(self):
-        self.tile_x, self.tile_y = 32, 32
+        self.tile_x, self.tile_y = BLOCK_SIZE, BLOCK_SIZE
 
     def load_tile(self, type, x, y):
         image = 0
@@ -23,7 +25,9 @@ class Map:
             image = pygame.image.load("Assets/nether.png").convert()
         elif type == END:
             image = pygame.image.load("Assets/brick.png").convert()
-        image_width, image_height = 32,32
+        elif type == SPIKES:
+            image = pygame.image.load("Assets/spikes.png").convert_alpha()
+        image_width, image_height = BLOCK_SIZE,BLOCK_SIZE
         rect = (x * image_width, y * image_height, image_width, image_height)
         return [image, rect]
 
@@ -36,7 +40,7 @@ class Map:
             level.append(l)
             line = file.readline()
             self.level_repr.append(line)
-            for j in range(0, 73):
+            for j in range(0, 79):
                 l.append(self.load_tile(line[j], j, i))
         return level
 
