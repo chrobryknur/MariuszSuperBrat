@@ -1,8 +1,9 @@
 import pygame
 import math
 
-
 BLOCK_SIZE = 32
+
+
 class Creature:
 
     def __init__(self, pos):

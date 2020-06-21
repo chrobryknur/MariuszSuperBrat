@@ -1,8 +1,9 @@
 import pygame
 import Classes.Creature as Creature
 
-
 BLOCK_SIZE = 32
+
+
 class Snake(Creature.Creature):
     def __init__(self, pos):
         pygame.init()

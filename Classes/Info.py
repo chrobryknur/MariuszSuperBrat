@@ -22,7 +22,7 @@ class Info:
     def update_score(self):
         self.score = max(self.score,-math.floor(self.x/self.dx))
 
-    def text_sufrace(self,text, font,color):
+    def text_surface(self,text, font,color):
         white = (255, 255, 255)
         surf = pygame.Surface(font.size(text))
         surf.fill(white)
@@ -34,7 +34,7 @@ class Info:
 
     def draw(self,surface):
         self.infoText = pygame.font.Font("Assets/pcsenior.ttf", 15)
-        surface.blit(self.text_sufrace("Score:" + str(self.score), self.infoText, (0, 0, 0)), (600, 20))
-        surface.blit(self.text_sufrace("Lifes left:", self.infoText, (0, 0, 0)), (600, 50))
-        surface.blit(self.text_sufrace(str(self.lifes_left), self.infoText, (255, 0, 0)), (770, 50))
+        surface.blit(self.text_surface("Score:" + str(self.score), self.infoText, (0, 0, 0)), (600, 20))
+        surface.blit(self.text_surface("Lifes left:", self.infoText, (0, 0, 0)), (600, 50))
+        surface.blit(self.text_surface(str(self.lifes_left), self.infoText, (255, 0, 0)), (770, 50))
         return surface

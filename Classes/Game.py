@@ -75,7 +75,7 @@ class Game:
             player_pos = self.info.player_pos_on_map()
             creature_pos = creature.creature_rect()
 
-            self.player.colision_with_creature(player_pos,creature_pos)
+            self.player.collision_with_creature(player_pos,creature_pos)
 
 
     def check_for_end(self):
