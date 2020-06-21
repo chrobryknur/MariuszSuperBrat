@@ -39,6 +39,7 @@ class GameOver:
         for event in pygame.event.get():
             if event.type == pygame.locals.QUIT:
                 self.handle = False
+                self.next_s = -1
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     if self.restart_button[0].collidepoint(event.pos):
