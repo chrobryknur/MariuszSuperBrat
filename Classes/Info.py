@@ -38,5 +38,5 @@ class Info:
         surface.blit(self.text_surface("Score:" + str(self.score), self.infoText, (0, 0, 0)), (600, 20))
         surface.blit(self.text_surface("Lifes left:", self.infoText, (0, 0, 0)), (600, 50))
         surface.blit(self.text_surface("FPS:" + str(math.floor(self.fps)),self.infoText, (0,0,0)),(20,20))
-        surface.blit(self.text_surface(str(self.lifes_left), self.infoText, (255, 0, 0)), (770, 50))
+        surface.blit(self.text_surface(str(self.lifes_left + 1), self.infoText, (255, 0, 0)), (770, 50))
         return surface

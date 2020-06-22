@@ -6,7 +6,7 @@ BLOCK_SIZE = 32
 
 class Player:
     def __init__(self):
-        self.lifes = 3
+        self.lifes = 2
         self.velocity = [0, 0]
         self.reached_end = False
         self.current_texture = "right"
