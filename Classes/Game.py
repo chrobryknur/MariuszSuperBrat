@@ -1,9 +1,9 @@
 import pygame
-import Classes.Map as Map
-import Classes.Info as Info
-import Classes.Player as Player
-import Classes.Fly as Fly
-import Classes.Snake as Snake
+import Map
+import Info
+import Player
+import Fly
+import Snake
 
 
 
@@ -15,7 +15,7 @@ class Game:
         self.player = Player.Player()
         self.info = Info.Info(self.player.lifes, 0)
         self.clock = pygame.time.Clock()
-        self.background = pygame.image.load("Assets/main_menu_bg.png").convert()
+        self.background = pygame.image.load("../Assets/main_menu_bg.png").convert()
         self.level = self.map.load_level()
         self.handle = True
         self.next_s = 1

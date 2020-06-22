@@ -34,7 +34,7 @@ class Info:
         return [self.x - self.player_x, self.y - self.player_y]
 
     def draw(self,surface):
-        self.infoText = pygame.font.Font("Assets/pcsenior.ttf", 15)
+        self.infoText = pygame.font.Font("../Assets/pcsenior.ttf", 15)
         surface.blit(self.text_surface("Score:" + str(self.score), self.infoText, (0, 0, 0)), (600, 20))
         surface.blit(self.text_surface("Lifes left:", self.infoText, (0, 0, 0)), (600, 50))
         surface.blit(self.text_surface("FPS:" + str(math.floor(self.fps)),self.infoText, (0,0,0)),(20,20))
