@@ -13,7 +13,7 @@ class Player:
         self.died = False
         self.texture_left = pygame.image.load("Assets/Mariusz_left.png").convert_alpha()
         self.texture_right = pygame.image.load("Assets/Mariusz_right.png").convert_alpha()
-        self.jumping = -1
+        self.jumping = 0
 
     def check_for_collisions_right(self, pos, map):
         right1 = map[math.floor(-pos[1] / BLOCK_SIZE)][math.floor((-pos[0] + BLOCK_SIZE - 1) / BLOCK_SIZE)]
@@ -57,9 +57,12 @@ class Player:
             self.died = True
 
     def draw(self, surface, x, y):
-        pygame.draw.rect(surface, (0, 0, 0), (x, y, BLOCK_SIZE, BLOCK_SIZE))
+        s = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
+        pygame.draw.rect(s, (0, 0, 0), (x, y, BLOCK_SIZE, BLOCK_SIZE), 1)
+        s.set_alpha(0)
+        surface.blit(s,(x,y))
         if self.current_texture == "right":
-            surface.blit(self.texture_right, (x - 8, y - 16))
+            surface.blit(self.texture_right, (x, y))
         else:
-            surface.blit(self.texture_left, (x - 8, y - 16))
+            surface.blit(self.texture_left, (x, y))
         return surface

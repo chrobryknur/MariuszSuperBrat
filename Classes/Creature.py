@@ -41,6 +41,6 @@ class Creature:
         else:
             self.toggle_speed()
             self.pos[0] += self.speed
-        pygame.draw.rect(surface, (0, 0, 0), (self.pos[0], self.pos[1], BLOCK_SIZE, BLOCK_SIZE))
+        pygame.draw.rect(surface, (0, 0, 0), (self.pos[0], self.pos[1], BLOCK_SIZE, BLOCK_SIZE), 1)
         surface.blit(self.texture, (self.pos[0] + x, self.pos[1]))
         return surface

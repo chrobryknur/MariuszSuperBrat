@@ -48,6 +48,6 @@ class Map:
         for x, row in enumerate(level):
             for y, tile in enumerate(row):
                 if tile[0]:
-                    pygame.draw.rect(surface, (0, 0, 0, 0), tile[1])
+                    pygame.draw.rect(surface, (72, 226, 214, 0), tile[1],1)
                     surface.blit(tile[0], (tile[1][0] + dx, tile[1][1] + dy))
         return surface
