@@ -46,6 +46,7 @@ class Game:
                 if event.key == pygame.K_d:
                     self.info.pressed_d = False
 
+    def update_position(self):
         if self.player.jumping > 0:
             self.info.player_y -= self.player.jump(self.info.player_pos_on_map(), self.map.level_repr)
             self.player.jumping = self.player.jumping -1
@@ -54,7 +55,6 @@ class Game:
             self.info.player_y += self.info.gravity
             if self.info.player_y >= 568:
                 self.player.died = True
-
 
         if self.info.pressed_a:
             pos = self.info.player_pos_on_map()
@@ -79,7 +79,6 @@ class Game:
         for creature in self.creatures:
             player_pos = self.info.player_pos_on_map()
             creature_pos = creature.creature_rect()
-
             self.player.collision_with_creature(player_pos,creature_pos)
 
 
@@ -112,6 +111,7 @@ class Game:
     def draw(self, screen):
         while self.handle and not self.player.reached_end and not self.player.died:
             self.handle_events()
+            self.update_position()
             self.info.update_score()
             self.info.fps = self.clock.get_fps()
             self.update_screen(screen)
